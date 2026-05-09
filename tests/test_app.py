@@ -124,8 +124,10 @@ def test_quiz_page_renders_multiple_choice_options(tmp_path: Path):
 
     assert response.status_code == 200
     assert "smoke test" in html
-    assert "冒烟测试" in html
-    assert "回归测试" in html
+    assert "浅层检查" in html
+    assert "确认旧功能没坏" in html
+    assert "冒烟测试" not in html
+    assert "回归测试" not in html
     assert "小测一下" in html
 
 
@@ -138,7 +140,7 @@ def test_wrong_quiz_answer_keeps_reinforcement_flag(tmp_path: Path):
 
     response = app.test_client().post(
         "/quiz/smoke-test",
-        data={"choice": "回归测试", "category": "一、测试与质量"},
+        data={"choice": "确认旧功能没坏。", "category": "一、测试与质量"},
     )
     saved = json.loads(progress.read_text(encoding="utf-8"))
 
@@ -157,7 +159,7 @@ def test_correct_quiz_answer_clears_reinforcement_flag(tmp_path: Path):
 
     response = app.test_client().post(
         "/quiz/smoke-test",
-        data={"choice": "冒烟测试", "category": "一、测试与质量"},
+        data={"choice": "浅层检查。", "category": "一、测试与质量"},
     )
     saved = json.loads(progress.read_text(encoding="utf-8"))
 

@@ -108,7 +108,7 @@ def create_app(
         progress = load_progress(progress_path)
         state = dict(progress.get(card_id, {"box": 1}))
 
-        if choice == card.translation:
+        if choice == choice_quiz.answer:
             state["needs_quiz"] = False
             state["quiz_correct"] = int(state.get("quiz_correct", 0)) + 1
             if _is_due_now(state):

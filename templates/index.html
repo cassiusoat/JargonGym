@@ -18,6 +18,18 @@
         </form>
       </header>
 
+      <nav class="library-picker" aria-label="词库选择">
+        <a class="library-pill{% if not selected_category %} active{% endif %}" href="{{ url_for('index') }}">全部黑话</a>
+        {% for category in categories %}
+          <a
+            class="library-pill{% if selected_category == category %} active{% endif %}"
+            href="{{ url_for('index', category=category) }}"
+          >
+            {{ category }}
+          </a>
+        {% endfor %}
+      </nav>
+
       <section class="stats" aria-label="学习进度">
         <div class="stat-tile tomato">
           <span>今日待练</span>
@@ -37,6 +49,16 @@
         </div>
       </section>
 
+      {% if pending_quiz_card %}
+        <section class="reinforcement-strip">
+          <div>
+            <span>本轮强化</span>
+            <strong>{{ stats.quiz }} 张卡需要小测复活</strong>
+          </div>
+          <a class="ghost-link compact" href="{{ url_for('quiz', card_id=pending_quiz_card.id, category=selected_category) }}">去做小测</a>
+        </section>
+      {% endif %}
+
       {% if card %}
         <section class="study-panel" aria-labelledby="card-title">
           <div class="coach-strip">
@@ -52,11 +74,19 @@
           <h2 id="card-title">{{ card.term }}</h2>
           <p class="translation">{{ card.translation }}</p>
 
+          <form class="rescue-form" action="{{ url_for('review', card_id=card.id) }}" method="post">
+            <input type="hidden" name="category" value="{{ selected_category }}">
+            <button name="grade" value="again" class="rescue-button" type="submit">
+              完全想不起来，直接进救援小测
+            </button>
+          </form>
+
           <details class="answer-box">
             <summary>揭晓黑话真身</summary>
             <div class="answer-text">{{ answer_html }}</div>
 
             <form class="grade-grid" action="{{ url_for('review', card_id=card.id) }}" method="post">
+              <input type="hidden" name="category" value="{{ selected_category }}">
               <button name="grade" value="again" class="grade again" type="submit">
                 <span>完全忘了</span>
                 <small>教练，救我</small>

@@ -8,9 +8,12 @@ Build a local, funny, low-friction web demo for memorizing Claude Code jargon fr
 
 Use active recall plus a five-box Leitner system.
 
+- The learner selects a library scope before studying.
 - A card first shows the term and category only.
 - The learner tries to recall the meaning before revealing the answer.
+- If the learner has no recall at all, they can mark the card as forgotten immediately.
 - After revealing, the learner grades recall with four buttons.
+- Forgotten and fuzzy cards enter an immediate quiz queue.
 - The grade updates the card's Leitner box and next review time.
 
 Intervals:
@@ -28,6 +31,13 @@ Grades:
 - `good`: move up one box
 - `easy`: move up two boxes
 
+Immediate reinforcement:
+
+- `again` and `hard` redirect to a four-choice quiz.
+- The quiz gives instant feedback.
+- Wrong answers keep the card in the reinforcement queue.
+- Correct answers clear the reinforcement flag and return to the selected library.
+
 ## Architecture
 
 Use Flask with server-rendered HTML. The app parses the Markdown glossary at startup, keeps the original glossary read-only, and stores learner progress in `data/progress.json`.
@@ -36,9 +46,11 @@ Files:
 
 - `jargongym/cards.py`: parse Markdown into card objects.
 - `jargongym/leitner.py`: choose due cards and update review state.
+- `jargongym/quiz.py`: build deterministic four-choice vocabulary tests.
 - `jargongym/store.py`: read/write JSON progress safely.
 - `jargongym/app.py`: Flask routes.
 - `templates/index.html`: one-page study interface.
+- `templates/quiz.html`: immediate reinforcement quiz.
 - `static/styles.css`: playful UI styling.
 - `tests/`: parser, Leitner, and route smoke tests.
 

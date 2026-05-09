@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jargon Gym 小测</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">错题强化区</p>
+          <h1>小测一下</h1>
+        </div>
+        <a class="ghost-link" href="{{ url_for('index', category=selected_category) if selected_category else url_for('index') }}">回训练台</a>
+      </header>
+
+      <section class="study-panel quiz-panel" aria-labelledby="quiz-title">
+        <div class="coach-strip">
+          <span>救援教练</span>
+          <strong>这不是惩罚，是把刚滑走的记忆拽回来。</strong>
+        </div>
+
+        <div class="card-meta">
+          <span>{{ quiz.card.category }}</span>
+          <span>四选一强化</span>
+        </div>
+
+        <h2 id="quiz-title">{{ quiz.card.term }}</h2>
+        <p class="translation">{{ quiz.prompt }}</p>
+
+        {% if feedback %}
+          <div class="feedback bad">{{ feedback }}</div>
+          <div class="answer-text quiz-answer">{{ answer_html }}</div>
+        {% endif %}
+
+        <form class="choice-grid" action="{{ url_for('submit_quiz', card_id=quiz.card.id) }}" method="post">
+          <input type="hidden" name="category" value="{{ selected_category }}">
+          {% for option in quiz.options %}
+            <button
+              class="choice-button{% if selected_choice == option %} selected{% endif %}"
+              name="choice"
+              value="{{ option }}"
+              type="submit"
+            >
+              {{ option }}
+            </button>
+          {% endfor %}
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

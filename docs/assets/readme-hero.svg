@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
+  <title id="title">Jargon Gym</title>
+  <desc id="desc">A playful light theme banner for a jargon memorization app.</desc>
+  <defs>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#e9decb" stroke-width="1"/>
+    </pattern>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="8" dy="8" stdDeviation="0" flood-color="#24211c"/>
+    </filter>
+  </defs>
+  <rect width="1280" height="640" fill="#fff8e8"/>
+  <rect width="1280" height="640" fill="url(#grid)"/>
+  <g transform="translate(86 72)">
+    <text x="0" y="0" fill="#246b9f" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="800">CLAUDE CODE JARGON TRAINING</text>
+    <text x="0" y="116" fill="#22201b" font-family="Inter, Arial, sans-serif" font-size="118" font-weight="900">Jargon Gym</text>
+    <text x="4" y="170" fill="#148957" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="900">主动回忆 + Leitner + 小测救援</text>
+  </g>
+  <g transform="translate(92 304)" filter="url(#shadow)">
+    <rect x="0" y="0" width="330" height="116" rx="10" fill="#ffe0d6" stroke="#24211c" stroke-width="4"/>
+    <text x="28" y="43" fill="#6f675b" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="900">今日待练</text>
+    <text x="28" y="94" fill="#22201b" font-family="Inter, Arial, sans-serif" font-size="56" font-weight="900">146</text>
+  </g>
+  <g transform="translate(460 304)" filter="url(#shadow)">
+    <rect x="0" y="0" width="330" height="116" rx="10" fill="#c8f0dc" stroke="#24211c" stroke-width="4"/>
+    <text x="28" y="43" fill="#6f675b" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="900">救援小测</text>
+    <text x="28" y="94" fill="#22201b" font-family="Inter, Arial, sans-serif" font-size="56" font-weight="900">4选1</text>
+  </g>
+  <g transform="translate(828 304)" filter="url(#shadow)">
+    <rect x="0" y="0" width="330" height="116" rx="10" fill="#ffe66d" stroke="#24211c" stroke-width="4"/>
+    <text x="28" y="43" fill="#6f675b" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="900">黑话大师</text>
+    <text x="28" y="94" fill="#22201b" font-family="Inter, Arial, sans-serif" font-size="56" font-weight="900">soon</text>
+  </g>
+  <g transform="translate(94 484)">
+    <rect x="0" y="0" width="1094" height="70" rx="12" fill="#ffffff" stroke="#24211c" stroke-width="4"/>
+    <text x="28" y="45" fill="#22201b" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="900">yak shaving</text>
+    <text x="222" y="45" fill="#6f675b" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="800">只想合并 PR，结果先修工具链、再修工具链的工具链。</text>
+  </g>
+</svg>
+

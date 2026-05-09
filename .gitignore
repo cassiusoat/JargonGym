@@ -1,7 +1,35 @@
-.venv/
+# macOS
 .DS_Store
+
+# Python
 __pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# uv / packaging
+.python-version
+dist/
+build/
+*.egg-info/
+
+# Test and coverage output
 .pytest_cache/
-*.pyc
+.coverage
+htmlcov/
+
+# Flask local files
+instance/
+.webassets-cache/
+
+# Local app state
 data/progress.json
 data/progress.json.corrupt-*
+
+# Local env files
+.env
+.env.*

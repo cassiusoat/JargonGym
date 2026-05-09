@@ -10,6 +10,10 @@ Jargon Gym 会把 Claude Code 风格的黑话词典变成一个背诵训练器�
 
 如果你曾经在别人说 `yak shaving`、`dogfooding`、`bus factor`、`shadow traffic` 的时候认真点头，但心里想的是“我是不是应该早就知道这个词是什么意思”，那这里就是你的黑话训练台。
 
+## 界面预览
+
+![Jargon Gym 界面截图](docs/assets/app-screenshot.png)
+
 ## 为什么做这个
 
 工程黑话有时真的有用，但它们听起来也很像一个群聊被强行晋升成了架构评审：
@@ -112,4 +116,3 @@ static/
 ## 许可证
 
 MIT
-

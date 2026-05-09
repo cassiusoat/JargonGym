@@ -10,6 +10,10 @@ Jargon Gym turns a Claude Code-style glossary into a flashcard trainer: active r
 
 If you have ever nodded confidently at `yak shaving`, `dogfooding`, `bus factor`, or `shadow traffic` while secretly thinking "I should know what that means by now", this is your training room.
 
+## Interface Preview
+
+![Jargon Gym interface screenshot](docs/assets/app-screenshot.png)
+
 ## Why
 
 Engineering jargon can be useful, but it often sounds like a group chat that somehow got promoted to architecture review:
@@ -112,4 +116,3 @@ The app does not modify the source glossary.
 ## License
 
 MIT
-

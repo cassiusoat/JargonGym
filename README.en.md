@@ -10,6 +10,12 @@ Jargon Gym turns a Claude Code-style glossary into a flashcard trainer: active r
 
 If you have ever nodded confidently at `yak shaving`, `dogfooding`, `bus factor`, or `shadow traffic` while secretly thinking "I should know what that means by now", this is your training room.
 
+## Project Positioning
+
+Jargon Gym is a **local-first** learning tool: run it on your own machine, use it for yourself, and keep your progress locally. It is not designed as a production web service and does not require accounts.
+
+This version is intentionally finished as an entertainment demo. The repo is public mainly so interested developers can fork it and keep playing with it, for example by turning it into a mobile, Mac, or desktop app.
+
 ## Interface Preview
 
 ![Jargon Gym interface screenshot](docs/assets/app-screenshot.png)
@@ -43,7 +49,7 @@ The project is deliberately lighthearted, but the learning loop is real:
 - **Direct rescue mode**: if a term is blank in your head, send it straight to a quiz.
 - **Leitner spaced repetition**: cards move through five boxes based on recall quality.
 - **Instant reinforcement quizzes**: `again` and `hard` cards become four-choice tests.
-- **Local JSON progress**: no database, no account, no cloud dependency.
+- **Local JSON memory system**: no database, no account, no cloud dependency; progress survives after the local server stops.
 - **Light comic UI**: designed to feel like an office jargon gym, not a serious enterprise dashboard.
 
 ## Demo Flow
@@ -105,8 +111,16 @@ static/
 
 The app does not modify the source glossary.
 
-## Roadmap Ideas
+`data/progress.json` is the local memory system. It records each card's Leitner Box, next due time, review count, last grade, and last review time. Stopping the local server only stops the web process; it does not erase this file. When you start the app again, it continues from the previous learning state.
 
+To start over, click the in-app reset button or delete `data/progress.json` manually. The file is ignored by `.gitignore`, so personal learning progress is not published to GitHub.
+
+## Fork Ideas
+
+This is not a promised roadmap. It is a list of ideas for other developers who want to fork the project and keep the joke alive:
+
+- Package it as a mobile Web/PWA app, a Mac app, or a Windows/Linux desktop app.
+- Build fuller clients with Tauri, Electron, PyInstaller, or native mobile stacks.
 - Add typed-answer mode instead of only multiple choice.
 - Add daily review limits and session summaries.
 - Add import/export for custom company jargon.

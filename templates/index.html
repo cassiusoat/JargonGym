@@ -54,7 +54,7 @@
 
           <details class="answer-box">
             <summary>揭晓黑话真身</summary>
-            <div class="answer-text">{{ card.answer_markdown }}</div>
+            <div class="answer-text">{{ answer_html }}</div>
 
             <form class="grade-grid" action="{{ url_for('review', card_id=card.id) }}" method="post">
               <button name="grade" value="again" class="grade again" type="submit">
@@ -86,4 +86,3 @@
     </main>
   </body>
 </html>
-

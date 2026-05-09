@@ -5,6 +5,7 @@ description = "A tiny local web demo for memorizing Claude Code jargon."
 requires-python = ">=3.9"
 dependencies = [
     "flask>=3.0",
+    "markdown>=3.6",
 ]
 
 [dependency-groups]

@@ -6,6 +6,8 @@ from pathlib import Path
 from typing import Any
 
 from flask import Flask, abort, redirect, render_template, request, url_for
+import markdown as markdown_lib
+from markupsafe import Markup
 
 from jargongym.cards import Card, parse_glossary
 from jargongym.leitner import VALID_GRADES, due_cards, review_card
@@ -42,6 +44,7 @@ def create_app(
             "index.html",
             card=current,
             card_state=progress.get(current.id, {}) if current else {},
+            answer_html=_render_markdown(current.answer_markdown) if current else Markup(""),
             stats=stats,
         )
 
@@ -85,9 +88,17 @@ def _stats(cards: list[Card], progress: dict[str, dict[str, Any]], due_count: in
     }
 
 
+def _render_markdown(markdown_text: str) -> Markup:
+    html = markdown_lib.markdown(
+        markdown_text,
+        extensions=["extra", "sane_lists"],
+        output_format="html",
+    )
+    return Markup(html)
+
+
 def card_to_dict(card: Card) -> dict[str, Any]:
     return asdict(card)
 
 
 app = create_app()
-

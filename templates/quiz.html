@@ -27,7 +27,12 @@
           <span>四选一强化</span>
         </div>
 
-        <h2 id="quiz-title">{{ quiz.card.term }}</h2>
+        <h2 id="quiz-title">
+          <span>{{ quiz.card.term }}</span>
+          {% if quiz.card.translation %}
+            <span class="term-translation">{{ quiz.card.translation }}</span>
+          {% endif %}
+        </h2>
         <p class="translation">{{ quiz.prompt }}</p>
 
         {% if feedback %}
@@ -39,12 +44,12 @@
           <input type="hidden" name="category" value="{{ selected_category }}">
           {% for option in quiz.options %}
             <button
-              class="choice-button{% if selected_choice == option %} selected{% endif %}"
+              class="choice-button{% if selected_choice == option.value %} selected{% endif %}"
               name="choice"
-              value="{{ option }}"
+              value="{{ option.value }}"
               type="submit"
             >
-              {{ option }}
+              {{ option.label_markdown|inline_markdown }}
             </button>
           {% endfor %}
         </form>

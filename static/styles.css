@@ -425,7 +425,16 @@ h2 {
 }
 
 .quiz-panel h2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.18em;
   font-size: clamp(2rem, 6vw, 4.2rem);
+}
+
+.term-translation {
+  color: var(--mint-strong);
+  font-size: clamp(1.35rem, 4vw, 2.6rem);
 }
 
 .feedback {
@@ -463,6 +472,10 @@ h2 {
   cursor: pointer;
   font-weight: 900;
   text-align: left;
+}
+
+.choice-button em {
+  font-style: italic;
 }
 
 .choice-button:hover,

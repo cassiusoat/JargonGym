@@ -126,9 +126,41 @@ def test_quiz_page_renders_multiple_choice_options(tmp_path: Path):
     assert "smoke test" in html
     assert "浅层检查" in html
     assert "确认旧功能没坏" in html
-    assert "冒烟测试" not in html
-    assert "回归测试" not in html
+    assert 'value="冒烟测试"' not in html
+    assert 'value="回归测试"' not in html
     assert "小测一下" in html
+
+
+def test_quiz_page_shows_translation_and_renders_option_markdown(tmp_path: Path):
+    glossary = tmp_path / "glossary.md"
+    glossary.write_text(
+        "## 七、论证 / 沟通比喻类\n\n"
+        "### steel man —— 钢人\n\n"
+        "- 反过来：用**最强版本**表述对方观点，再来反驳。诚实辩论的姿态。\n\n"
+        "### de minimis —— 微不足道原则\n\n"
+        "- 全称 *de minimis non curat lex*：\"法律不理会琐碎小事\"。\n\n"
+        "### straw man —— 稻草人\n\n"
+        "- 故意扭曲对方观点变成更容易反驳的版本，再去打。\n\n"
+        "### caveat —— 限定 / 警告\n\n"
+        "- \"这话有前提，别外推\"。\n",
+        encoding="utf-8",
+    )
+    progress = tmp_path / "progress.json"
+    app = create_app(glossary_path=glossary, progress_path=progress)
+
+    response = app.test_client().get(
+        "/quiz/steel-man",
+        query_string={"category": "七、论证 / 沟通比喻类"},
+    )
+    html = response.get_data(as_text=True)
+
+    assert response.status_code == 200
+    assert "steel man" in html
+    assert "钢人" in html
+    assert "下面哪个是真实含义？" in html
+    assert "steel man 最接近" not in html
+    assert "<em>de minimis non curat lex</em>" in html
+    assert "*de minimis non curat lex*" not in html
 
 
 def test_wrong_quiz_answer_keeps_reinforcement_flag(tmp_path: Path):

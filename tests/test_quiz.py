@@ -35,11 +35,12 @@ def test_choice_quiz_uses_meaning_line_instead_of_translation():
     ]
 
     quiz = build_choice_quiz(cards[0], cards, cards)
+    option_values = [option.value for option in quiz.options]
 
     assert quiz.answer == "跑一组最浅的检查，确认整体能启动。"
-    assert "冒烟测试" not in quiz.options
-    assert "回归测试" not in quiz.options
-    assert "固定一组老用例，每次改完都重跑。" in quiz.options
+    assert "冒烟测试" not in option_values
+    assert "回归测试" not in option_values
+    assert "固定一组老用例，每次改完都重跑。" in option_values
 
 
 def test_choice_quiz_falls_back_to_first_explanation_bullet():
@@ -75,7 +76,47 @@ def test_choice_quiz_falls_back_to_first_explanation_bullet():
     ]
 
     quiz = build_choice_quiz(cards[0], cards, cards)
+    option_values = [option.value for option in quiz.options]
 
     assert quiz.answer == "反过来：用最强版本表述对方观点，再来反驳。诚实辩论的姿态。"
-    assert "钢人" not in quiz.options
-    assert "故意扭曲对方观点变成更容易反驳的版本，再去打。" in quiz.options
+    assert "钢人" not in option_values
+    assert "故意扭曲对方观点变成更容易反驳的版本，再去打。" in option_values
+
+
+def test_choice_quiz_keeps_markdown_label_separate_from_plain_value():
+    cards = [
+        Card(
+            id="de-minimis",
+            term="de minimis",
+            translation="微不足道原则",
+            category="七、论证 / 沟通比喻类",
+            answer_markdown='- 全称 *de minimis non curat lex*："法律不理会琐碎小事"。',
+        ),
+        Card(
+            id="steel-man",
+            term="steel man",
+            translation="钢人",
+            category="七、论证 / 沟通比喻类",
+            answer_markdown="- 反过来：用**最强版本**表述对方观点，再来反驳。诚实辩论的姿态。",
+        ),
+        Card(
+            id="straw-man",
+            term="straw man",
+            translation="稻草人",
+            category="七、论证 / 沟通比喻类",
+            answer_markdown="- 故意扭曲对方观点变成更容易反驳的版本，再去打。",
+        ),
+        Card(
+            id="caveat",
+            term="caveat",
+            translation="限定 / 警告",
+            category="七、论证 / 沟通比喻类",
+            answer_markdown='- "这话有前提，别外推"。',
+        ),
+    ]
+
+    quiz = build_choice_quiz(cards[0], cards, cards)
+
+    assert quiz.answer == '全称 de minimis non curat lex："法律不理会琐碎小事"。'
+    assert quiz.options[0].value
+    assert any("*de minimis non curat lex*" in option.label_markdown for option in quiz.options)

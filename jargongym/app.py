@@ -31,6 +31,7 @@ def create_app(
     )
     app.config["GLOSSARY_PATH"] = Path(glossary_path)
     app.config["PROGRESS_PATH"] = Path(progress_path)
+    app.add_template_filter(_render_inline_markdown, "inline_markdown")
 
     @app.get("/")
     def index() -> str:
@@ -206,6 +207,17 @@ def _render_markdown(markdown_text: str) -> Markup:
         extensions=["extra", "sane_lists"],
         output_format="html",
     )
+    return Markup(html)
+
+
+def _render_inline_markdown(markdown_text: str) -> Markup:
+    html = markdown_lib.markdown(
+        markdown_text,
+        extensions=["extra", "sane_lists"],
+        output_format="html",
+    ).strip()
+    if html.startswith("<p>") and html.endswith("</p>"):
+        html = html[3:-4]
     return Markup(html)
 
 

@@ -4,11 +4,11 @@
 
 ![Dogfooding comic in Chinese](docs/assets/dogfooding-comic-zh.png)
 
-**一个不太严肃、但真的能帮你背工程黑话的本地网页应用。**
+一个不太严肃、但真的能帮你背 **Claude Code** 工程黑话的本地网页应用。
 
-Jargon Gym 会把 Claude Code 风格的黑话词典变成一个背诵训练器：先主动回忆，再揭晓答案，再用 Leitner 间隔重复和即时小测把“刚刚还会、转头就忘”的词重新捞回来。
+Jargon Gym 会把 **Claude Code** 风格的黑话词典变成一个背诵训练器：先主动回忆，再揭晓答案，再用 Leitner 间隔重复和即时小测把“刚刚还会、转头就忘”的词重新捞回来。
 
-如果你曾经在别人说 `yak shaving`、`dogfooding`、`bus factor`、`shadow traffic` 的时候认真点头，但心里想的是“我是不是应该早就知道这个词是什么意思”，那这里就是你的黑话训练台。
+如果你曾经在 **Claude Code** 语境里听到 `yak shaving`、`dogfooding`、`bus factor`、`shadow traffic` 的时候认真点头，但心里想的是“我是不是应该早就知道这个词是什么意思”，那这里就是你的黑话训练台。
 
 ## 项目定位
 
@@ -22,7 +22,7 @@ Jargon Gym 是一个 **local-first** 的本地学习小工具：默认在自己�
 
 ## 为什么做这个
 
-工程黑话有时真的有用，但它们听起来也很像一个群聊被强行晋升成了架构评审：
+**Claude Code** 的工程黑话有时真的有用，但它们听起来也很像一个群聊被强行晋升成了架构评审。尤其是 **Claude Code Opus 4.7** 发布后，黑话密度仿佛突然加了杠杆，记不住不是你的问题，是词库先动的手：
 
 - `dogfooding` / 吃自家狗粮：不是宠物食品测评，而是团队自己先用自家产品，先被自己产品咬一口，再发现痛点。
 - `yak shaving` / 剃牦牛：你只是想合并一个 PR，结果先修工具链，再修工具链的工具链。
@@ -44,7 +44,7 @@ Jargon Gym 是一个 **local-first** 的本地学习小工具：默认在自己�
 ## 功能
 
 - **Markdown 词典驱动**：题库从 `docs/claude-code-jargon-glossary.md` 自动解析。
-- **词库选择**：可以只背测试、调试、部署、Claude Code/Git 等某一类黑话。
+- **词库选择**：可以只背测试、调试、部署、**Claude Code** / Git 等某一类黑话。
 - **主动回忆优先**：答案默认遮盖，不先偷看。
 - **救援模式**：完全想不起来时，可以直接进入小测。
 - **Leitner 间隔重复**：根据记忆质量推进五箱制复习。

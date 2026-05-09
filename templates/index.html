@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jargon Gym</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Claude Code Opus 4.7 黑话专项训练</p>
+          <h1>Jargon Gym</h1>
+        </div>
+        <form action="{{ url_for('reset') }}" method="post">
+          <button class="ghost-button" type="submit">清空肌肉记忆</button>
+        </form>
+      </header>
+
+      <section class="stats" aria-label="学习进度">
+        <div class="stat-tile tomato">
+          <span>今日待练</span>
+          <strong>{{ stats.due }}</strong>
+        </div>
+        <div class="stat-tile mint">
+          <span>已经见过</span>
+          <strong>{{ stats.reviewed }}</strong>
+        </div>
+        <div class="stat-tile lemon">
+          <span>黑话大师</span>
+          <strong>{{ stats.learned }}</strong>
+        </div>
+        <div class="stat-tile paper">
+          <span>题库总量</span>
+          <strong>{{ stats.total }}</strong>
+        </div>
+      </section>
+
+      {% if card %}
+        <section class="study-panel" aria-labelledby="card-title">
+          <div class="coach-strip">
+            <span>今日教练点评</span>
+            <strong>先别偷看答案，脑内开一次 code review。</strong>
+          </div>
+
+          <div class="card-meta">
+            <span>{{ card.category }}</span>
+            <span>Leitner Box {{ card_state.get("box", 1) }}</span>
+          </div>
+
+          <h2 id="card-title">{{ card.term }}</h2>
+          <p class="translation">{{ card.translation }}</p>
+
+          <details class="answer-box">
+            <summary>揭晓黑话真身</summary>
+            <div class="answer-text">{{ card.answer_markdown }}</div>
+
+            <form class="grade-grid" action="{{ url_for('review', card_id=card.id) }}" method="post">
+              <button name="grade" value="again" class="grade again" type="submit">
+                <span>完全忘了</span>
+                <small>教练，救我</small>
+              </button>
+              <button name="grade" value="hard" class="grade hard" type="submit">
+                <span>有点眼熟</span>
+                <small>像在 PR 里见过</small>
+              </button>
+              <button name="grade" value="good" class="grade good" type="submit">
+                <span>会了</span>
+                <small>能骗过评审</small>
+              </button>
+              <button name="grade" value="easy" class="grade easy" type="submit">
+                <span>黑话上身</span>
+                <small>请叫我上下文窗口</small>
+              </button>
+            </form>
+          </details>
+        </section>
+      {% else %}
+        <section class="study-panel empty-state">
+          <p class="eyebrow">训练结束</p>
+          <h2>今天没有到期黑话</h2>
+          <p>你的大脑暂时通过了 smoke test。明天再来继续把术语练成肌肉记忆。</p>
+        </section>
+      {% endif %}
+    </main>
+  </body>
+</html>
+
